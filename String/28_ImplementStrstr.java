@@ -50,3 +50,32 @@ class Solution {
         return -1;
     }
 }
+
+/*
+An accepted solution
+*/
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int l2 = needle.length(), l1 = haystack.length();
+        if (l1 < l2) {
+            return -1;
+        } else if (l2 == 0) {
+            return 0;
+        }
+        int hPointer = 0, nPointer = 0;
+        while(hPointer <= l1-l2){
+            if(haystack.charAt(hPointer) == needle.charAt(0)){
+                while(nPointer < l2){
+                    if(haystack.charAt(hPointer+nPointer) != needle.charAt(nPointer)){
+                        break;
+                    }
+                    nPointer++;
+                }
+                if(nPointer == l2) return hPointer;
+            }
+            nPointer = 0;
+            hPointer++;
+        }
+        return -1;
+    }
+}
