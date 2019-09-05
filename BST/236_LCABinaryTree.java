@@ -38,3 +38,32 @@ class Solution {
         return null;
     }
 }
+
+// OPTIMAL SOLUTION
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int getNodes = 0;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ans_left = null, ans_right = null;
+        if (root == null) return null;
+        if (root.val == p.val || root.val == q.val) return root;
+        ans_left = lowestCommonAncestor(root.left, p, q);
+        ans_right = lowestCommonAncestor(root.right, p, q);
+        if (ans_left != ans_right) {
+            if (ans_left == null)
+                return ans_right;
+            if (ans_right == null)
+                return ans_left;
+            return root;
+        }
+        return null;
+    }
+}
