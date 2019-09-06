@@ -48,3 +48,31 @@ class Solution {
     }
     
 }
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        // idea, from top to bottom
+        // we should use long type here. int is not long enough.
+        return isValidHelper (root, Long.MAX_VALUE, Long.MIN_VALUE);
+    }
+    private boolean isValidHelper(TreeNode root, long upperLine, long lowerLine) {
+        if (root == null) return true;
+        // should be >= and <=, should not exist two same keys.
+        if (root.val >= upperLine) {
+            return false;
+        }
+        if (root.val <= lowerLine) {
+            return false;
+        }
+        return isValidHelper(root.left, root.val, lowerLine) && isValidHelper(root.right, upperLine, root.val);
+    }
+}
