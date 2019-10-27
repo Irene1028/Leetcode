@@ -27,3 +27,31 @@ class Solution {
         
     }
 }
+
+/*
+Time O(n^2)
+Space O(1)
+*/
+class Solution {
+    public boolean verifyPreorder(int[] preorder) {
+        return helper(preorder, 0, preorder.length);
+    }
+    public boolean helper(int[] preorder, int start, int end) {
+        if (start == end || start == end - 1) {
+            return true;
+        }
+        int i = start + 1;
+        while(i < end && preorder[i] < preorder[start]) {
+            i++;
+        }
+        if (i == end) {
+            return helper(preorder, start + 1, end);
+        }
+        for (int j = i; j < end; j++) {
+            if (preorder[j] <= preorder[start]) {
+                return false;
+            }
+        }
+        return helper(preorder, start + 1, i) && helper(preorder, i, end);
+    }
+}
