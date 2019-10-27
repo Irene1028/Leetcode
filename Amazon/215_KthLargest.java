@@ -18,3 +18,23 @@ class Solution {
 // Time
 // The time complexity of adding an element in a heap of size k is O(logk), and we do it N times that means O(Nlogk) time complexity for the algorithm.
 // Space, O(n)
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        Queue<Integer> q = new PriorityQueue<>();
+        for (int i = 0; i < nums.length; i++) {
+            q.offer(nums[i]);
+            if (q.size() > k) {
+                q.poll();
+            }
+        }
+        return q.poll();
+    }
+}
+
+// Time
+// The time complexity of adding an element in a heap of size k is O(logk), and we do it N times that means O(Nlogk) time complexity for the algorithm.
+// Space, O(k)
