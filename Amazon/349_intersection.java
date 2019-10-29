@@ -24,3 +24,9 @@ class Solution {
         return Arrays.copyOf(ans, i);
     }
 }
+
+/*
+Time = O(m+n), m for nums1 traverse, n for nums2 traverse, contains = O(1), because of HashSet.
+Space = O(m+n), m for set1, n for set2, in the worst case when all elements in the arrays are different.
+In the worst case, we do not have intersection. So the int array is of length 0.
+*/
