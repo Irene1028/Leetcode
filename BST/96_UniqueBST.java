@@ -19,3 +19,21 @@ class Solution {
         return ans;
     }
 }
+
+
+class Solution {
+    public int numTrees(int n) {
+        int[] validNum = new int[n + 1];
+        // num of valid BST for length n sequence
+        validNum[0] = 1;
+        validNum[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            // for sequence longer than 1;
+            for (int j = 0; j < i; j++) {
+                validNum[i] += validNum[i-j-1] * validNum[j];
+            }
+        }
+        return validNum[n];
+    }
+    
+}
