@@ -1,3 +1,4 @@
+/* leetcode not pass */
 class MaxStack {
     Stack<Integer> maxStack;
     Stack<Integer> tmpStack;
@@ -71,3 +72,60 @@ class MaxStack {
  * int param_4 = obj.peekMax();
  * int param_5 = obj.popMax();
  */
+
+/* leetcode passed */
+/* two stack solution */
+class maxStack{
+    Stack<Integer> maxStack;
+    Stack<Integer> stack;
+    int max = Integer.MIN_VALUE;
+    /** initialize your data structure here. */
+    public maxStack() {
+        maxStack = new Stack<>();
+        stack = new Stack<>();
+    }
+
+    public void push(int x) {
+        if (maxStack.isEmpty()) {
+            maxStack.push(max);
+        }
+        if (x > maxStack.peek()) {
+            maxStack.push(x);
+            max = x;
+        } else {
+            maxStack.push(max);
+        }
+        stack.push(x);
+    }
+
+    public int pop() {
+        maxStack.pop();
+        if (maxStack.isEmpty()) {
+            max = Integer.MIN_VALUE;
+        } else {
+            max = maxStack.peek();
+        }
+        return stack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int peekMax() {
+        return max;
+    }
+
+    public int popMax() {
+        Stack<Integer> tmp = new Stack<>();
+        int ret = max;
+        while (stack.peek() != max) {
+            tmp.push(pop());
+        }
+        pop();
+        while (!tmp.isEmpty()) {
+            push(tmp.pop());
+        }
+        return ret;
+    }
+}
