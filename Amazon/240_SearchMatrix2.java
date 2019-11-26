@@ -90,3 +90,17 @@ class Solution {
             || devideMatrix(matrix, target, mid + 1, right, up, row - 1);
     }
 }
+
+// awesome! O(m + n)
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int row = matrix.length - 1;
+        int col = 0;
+        while (row >= 0 && col < matrix[0].length) {
+            if (matrix[row][col] == target) return true;
+            if (matrix[row][col] > target) row--;
+            else col++;
+        }
+        return false;
+    }
+}
