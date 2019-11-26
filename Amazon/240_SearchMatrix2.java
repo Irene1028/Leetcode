@@ -67,3 +67,26 @@ class Solution {
         return false;
     }
 }
+
+// 4. devide and conquer
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix.length == 0 || matrix[0].length == 0) return false;
+        return devideMatrix(matrix, target, 0, matrix[0].length - 1, 0, matrix.length - 1);
+    }
+    private boolean devideMatrix(int[][] matrix, int target, int left, int right, int up, int down) {
+        // base case
+        if (left > right || up > down) return false;
+        if (target < matrix[up][left] || target > matrix[down][right]) return false;
+        int mid = (left + right) / 2;
+        int row = up;
+        while (row <= down && matrix[row][mid] <= target) {
+            if (matrix[row][mid] == target)
+                return true;
+            row++;
+        }
+        return devideMatrix(matrix, target, left, mid - 1, row, down)
+            || devideMatrix(matrix, target, mid + 1, right, up, row - 1);
+    }
+}
