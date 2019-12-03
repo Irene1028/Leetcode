@@ -35,3 +35,37 @@ class Solution {
         return ret;
     }
 }
+
+// 1. toLowerCase and toUpperCase could only be used on string
+// 2. cornor case string is "", string[] is empty
+// 3. toArray function
+class Solution {
+    public String[] findWords(String[] words) {
+        if (words.length == 0) return new String[0];
+        Map<Character, Integer> map = new HashMap<>();
+        List<String> res = new ArrayList<>();
+        String[] rows = {"QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"};
+        for (int i = 0; i < 3; i++) {
+            for (char c : rows[i].toCharArray()) {
+                map.put(c, i);
+            }
+        }
+        for (String s : words) {
+            if (s.equals("")) {
+                res.add(s);
+                continue;
+            }
+            int itsRow = map.get(s.toUpperCase().charAt(0));
+            for (char c : s.toUpperCase().toCharArray()) {
+                if (map.get(c) != itsRow) {
+                    itsRow = -1;
+                    break;
+                }
+            }
+            if (itsRow != -1) {
+                res.add(s);
+            }
+        }
+        return res.toArray(new String[0]);
+    }
+}
