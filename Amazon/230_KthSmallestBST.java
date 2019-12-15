@@ -27,3 +27,35 @@ class Solution {
 }
 // Time O(n), n is nodes number, we traverse every node.
 // Space, O(n), n is size of inorder
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int ans = Integer.MIN_VALUE;
+    int count = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        // inorder traverse, return k th
+        addInorder(root, k);
+        return ans;
+    }
+    private void addInorder(TreeNode root, int k) {
+        if (root == null) return;
+        if (ans != Integer.MIN_VALUE) return;
+        addInorder(root.left, k);
+        count++;
+        if (count == k) {
+            ans = root.val;
+        }
+        addInorder(root.right, k);
+        return;
+    }
+}
+// Time O(m), m is nodes that we reached, we do not traverse every node.
+// Space, O(m), n is time of recursion
